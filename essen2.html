@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LXturing</title>
+      <!-- we use it as a folder instead of this folder where this file sitiation (ep_15)  -->
+      <base href="https://fned.000webhostapp.com/" /> 
+
+    <!-- icon -->
+    <link rel="icon" href="languageicon.jpg" /> <!-- required  -->
+    <link rel="shortcut" href="languageicon.jpg" /> <!-- for google when someone wants to search -->
+    <link rel="apple-touch-icon" href="languageicon.jpg" /> <!-- for apple -->
+    <!---->
+
+    <!-- meta / google -->
+    <!-- <base href="https://fned.000webhostapp.com/" />  -->  <!-- we use it as a folder instead of this folder where this file sitiation (ep_15)  -->
+    <meta charset="UTF-8"> <!-- da3m ba9iyet a lou8at wl roumouz-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" > <!-- for all the phones -->
+    <meta name="description" content="here you can learn numerous languages easily "/>
+    <meta name="keywords" content="languages german italian Spanish english french food essen"/>
+    <meta name="author" content="youssef fned"/>
+    <!-- see input_file.html or ep43 -->
+    <!---->
+
+    <!-- website in facebook when you wanna share it in fcb -->
+    <meta property="og:title" content="LXturing" />
+    <meta property="og:description" content="here you can learn numerous languages easily" />
+    <meta property="og:image" content="languagem.png" />
+    <meta property="og:image:width" content="1200" />  <!-- you should make the width=height*2 -->
+    <meta property="og:image:height" content="630"/> 
+    <meta property="og:type" content="website" /> <!-- content="article" -->
+    <!--   <meta property="og:url" content="" />  --> <!--it's not required or necessery -->
+    <!-- bloger: ep45 -->
+    <!---->
+
+    <!-- twitter -->
+    <meta name="twitter:card" content="summary_large_image"> <!-- required -->
+    <meta name="twitter:title" content="LXturing">
+    <meta name="twitter:description" content="here you can learn numerous languages easily">
+    <meta name="twitter:image" content="languagem.png">
+
+    <meta name="twitter:site" content="@"> <!-- name of site account on twitter -->
+    <meta name="twitter:creator" content="@youssefFned">  <!-- name of creator account on twitter -->
+    <!---->
+    <style>
+        *{
+            margin:0px;
+            padding:0px;
+            font-family: 'Acme', sans-serif;
+            /*box-sizing: border-box;/**/
+        } 
+        body{
+            /* background-image: linear-gradient(to right,red,#1ccf5b,#7b2f8d); */
+            background-color: #5e1818;
+        }
+        /*------------------------------------------------------*/
+        .container {
+            position:absolute;
+            margin-top: 0px;
+            padding: 5px;
+            top:55px;
+            left:50%;
+  transform: translate(-50%,0);
+}
+
+.select-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-box .options-container {
+  background: #2f3640;
+  color: #f5f6fa;
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 8px;
+  overflow: hidden;
+
+  order: 1;
+}
+
+.selected {
+  background: #2f3640;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #f5f6fa;
+  position: relative;
+
+  order: 0;
+}
+
+.selected::after {
+  content: "";
+  background: url("img/arrow-down.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  right: 10px;
+  top: 5px;
+
+  transition: all 0.4s;
+}
+
+.select-box .options-container.active {
+  max-height: 240px;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.select-box .options-container.active + .selected::after {
+  transform: rotateX(180deg);
+  top: -6px;
+}
+
+.select-box .options-container::-webkit-scrollbar {
+  width: 8px;
+  background: #0d141f;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb {
+  background: #525861;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box .option,
+.selected {
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.select-box .option:hover {
+  background: #414b57;
+}
+
+.select-box label {
+  cursor: pointer;
+}
+
+.select-box .option .radio {
+  display: none;
+}
+        /*------------------------------------------------------*/
+        .row{
+            display: flex;
+            justify-content: center;
+            width:100%;
+            margin-left:0px;
+            flex-wrap: wrap;
+        }
+        .row_ph{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width:100%;
+            margin-left:0px;
+        }
+        .cr{
+            margin-right:26px;
+            width:300px;            
+            height:300px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        .cr_ph{
+            margin-top:26px;
+            width:100%;            
+            height:auto;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        /* .cr1{
+            /* margin-left:8px; *
+        } */
+        .img{
+            width:100%;
+            height:200px;
+            object-fit:cover;
+            border-radius: 20px;
+            padding:10px;
+            box-sizing: border-box;/*----------------------*/
+        }
+        .img_ph{
+            width:100%;
+            height:auto;
+            object-fit:cover;
+            border-radius: 20px;
+            padding:10px;
+        }
+        h2{
+            background-color:#2f3640;/*brown*/
+            width:100%;
+            border-radius: 20px;
+            padding:10px;
+            box-sizing: border-box;/*------------------------*/
+            color:white;
+        }
+        #divhead0{
+    width:100%;
+    height:6px;
+    position:relative;
+    top:0px;
+    left:0px;
+    background-color: #2f3640;
+    z-index:20;
+}
+#divhead2{
+  height: 44px;
+   /*29%*/ /*500px*/
+  /*min-width:300px;*/
+  background-color: #2f3640;
+  color: rgb(0, 0, 0);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, calc(100% - 50px) 100%, 50px 100%);
+  text-align:center;
+  line-height:44px;
+  position:relative;
+  top:-6px;
+  left:50%;
+  transform: translate(-50%,0);
+  z-index:20;
+  margin-bottom:60px;
+}
+#h2{/*36*/
+    margin:0px;
+    color:#ffffff;
+    /*padding-top:9px;*/
+  }
+  /*(((((((((((((((((((((((loder)))))))))))))))))))))))))))*/
+#loader {
+    border: 12px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 12px solid #444444;
+    width: 70px;
+    height: 70px;
+    z-index: 25;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+/*(((((((((((((((((((((((-----)))))))))))))))))))))))))))*/
+@media print {/*imprement*/
+  body{
+    background-color:white;
+  }
+  #divhead0{
+    display: none;
+  }
+  #divhead2{
+    display: none;
+  }
+  .container{
+    display:none;
+  }
+  h2{
+    color:black;
+  }
+}
+#btn{
+  position: absolute;
+  top:10px;
+  right:10px;
+  background-color: #2f3640;
+  padding:10px;
+  width:100px;
+  height:50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <div id="loader" class="center"></div>
+    <div style="width:100%; height:100%; position:absolute; left:0px; top:0px;  background-image: linear-gradient(to right,red,#1ccf5b,#7b2f8d); z-index:20;" id="white_board" ></div>
+    <div id="divhead0" name="d0" class="fastloading1" ></div>
+    <div id="divhead2" class="fastloading1" >
+        <p id="h2" >was essen Sie gern ?</p>
+    </div>
+    <div id="btn" >print</div>
+    <!----->
+    <div class="container">
+
+        <div class="select-box" >
+          <div class="options-container">
+            <div class="option" id="german" >
+              <input
+                type="radio"
+                class="radio"
+                name="category"
+              />
+              <label for="automobiles">german</label>
+            </div>
+  
+            
+  
+            <div class="option" id="spain" >
+              <input type="radio" class="radio" name="category" />
+              <label for="science">Spanish</label>
+            </div>
+  
+            <div class="option" id="italian" >
+              <input type="radio" class="radio" name="category" />
+              <label for="art" >italian</label>
+            </div>
+  
+            <div class="option" id="english" >
+              <input type="radio" class="radio" name="category" />
+              <label for="music" >english</label>
+            </div>
+
+            <div class="option" id="french" >
+              <input type="radio" class="radio" name="category" />
+              <label for="music" >french</label>
+            </div>
+  
+  
+          </div>
+  
+          <div class="selected">
+            languages
+          </div>
+        </div>
+      </div>
+<!---->
+    <script>
+        document.onreadystatechange = function() {
+    if (document.readyState !== "complete") {
+        document.querySelector(
+        "body").style.visibility = "hidden";
+        document.querySelector(
+        "#loader").style.visibility = "visible";
+        //
+        // var fastloading= document.querySelectorAll(".img");
+        // for(var i=0 ; i<fastloading.length ;i++){
+        //     fastloading[i].style.visibility = "hidden";
+        // }
+        // var fastloading1= document.querySelectorAll(".fastloading1");
+        // for(var i=0 ; i<fastloading1.length ;i++){
+        //     fastloading1[i].style.display="none"
+        // }
+        //
+        document.getElementById("white_board").style.display="block"
+    } else {
+        document.querySelector(
+        "#loader").style.display = "none";
+        document.querySelector(
+        "body").style.visibility = "visible";
+        //
+        // var fastloading= document.querySelectorAll(".img");
+        // for(var i=0 ; i<fastloading.length ;i++){
+        //     fastloading[i].style.visibility = "visible";
+        // }
+        // var fastloading1= document.querySelectorAll(".fastloading1");
+        // for(var i=0 ; i<fastloading1.length ;i++){
+        //     fastloading1[i].style.display="block"
+        // }
+        //
+        document.getElementById("white_board").style.display="none"
+    }
+};
+</script>
+<script>
+    var imgs=["die_milch.jpg","das_brot.jpg","der_salat.jpg","die_marmelade.jpg","die_mohre.jpg","die_wurst.jpg","die_apfelsine.jpg","das_mineralwasser.jpg","die_tomate.jpg","das_Ei.jpg","die_gurke.jpg","die_kuchen.jpg","der_honig.jpg","der_kakao.jpg","das brotchen.jpg","der_tee.jpg","die_banane.jpg","die_butter1.jpg","die_kartoffel.jpeg","der kaffe.jpg","der apfel.jpg","der_saft.jpg","die weintrauben.jpg","der kase.jpg","die_birne.jpg","der_fisch.jpg","das_fleisch.jpg","der wein.jpg","das_hahnchen.jpg","die orange.jpg","die Limone.jpg","die kaktusfeige.jpg","die erdbeere.jpg","frites.jpg","die suppe.jpg","dad hornchen.jpg","die schokolade.jpg","das toast.jpg","das Eis.jpg","der minztee.jpg","die spaghetti.jpg","der hamburger.jpg","die pizza.jpg","die nudeln.jpg","mandarinen.jpg","thunfisch.jpg","pudding.jpg","risotto.jpg","gulaschsuppe.jpg"];
+        var names=["die milch","das brot(e)","der salat(e)","die marmelade","die Möhre(n)","die wurst(``-e)","die apfelsine(n)","das mineralwasser","die tomate(n)","das Ei(er)","die gurke(n)","der kuchen(-)","der honig","der kakao","das brötchen(-)","der tee","die banane(n)","die butter","die kartoffel(n)","der kafee","der apfel(``)","der saft(``-e)","die weintrauben","der käse","die birne(n)","der fisch(-e)","das fleisch","der wein(-e)","das hähnchen(-)","die orange(n)","die limone(n)","die kaktusfeige(n)","die erdbeere(n)","frites","die suppe(n)","das hörnchen","die schokolade","das toast(s)","das Eis","der minztee","die spaghetti","der hamburger(-)","die pizza","die nudel(n)","mandarinen","thunfisch","pudding","risotto","die gulaschsuppe"]
+        var nenglish=["milk","bread","salad","jam","carrot","sausage","orange","mineral water","tomato","egg","cucumber","cake","honey","cocoa" ,"bun","tea","banana","butter","potato","coffee","apple"," juice","grapes","cheese","pear","fish","meat","wine" ,"the chicken","the orange","the lime","the prickly pear","the strawberry","fries","the soup","croissant","chocolate","toast","ice cream","mint tea","spaghetti","hamburger","pizza","the noodle","mandarin","tuna","pudding", "risotto", "goulash soup"]
+        var nspain=["leche","pan","ensalada","mermelada","zanahoria","salchicha","naranja","agua mineral ","tomate","huevo","pepino","pastel","miel","cacao","bollo","te"," plátano","mantequilla","patata","café","manzana","jugo","uvas","queso","pera","pescado","carne","vino" ,"el pollo","la naranja","la lima"," la tuna","la fresa","patatas fritas","la sopa","croissant","chocolate","tostada","helado","menta té","espagueti","hamburguesa","pizza","fideo", "mandarina", "atún"," budín", "risotto", "sopa goulash"]
+        var nitalian=["latte","pane","insalata","marmellata","carota","salsiccia","arancia","acqua minerale ","pomodoro","uovo","cetriolo","torta","miele","cacao" ,"panino","tè"," banana","burro","patata","caffè","mela","succo","uva","formaggio","pera","fish","carne","vino" ,"il pollo","l'arancia","il lime"," i fichi d'India","le fragole","patatine fritte","le zuppe","croissant","cioccolato","toast","gelato","menta tè","spaghetti","hamburger","pizza"," i noodle"," mandarino"," tonno"," budino"," risotto"," zuppa di gulasch"]
+        var nfrench=["lait","pain","salade","confiture","carotte","saucisse","orange","eau minérale ","tomate","œuf","concombre","gâteau","miel","cacao" ,"pain","thé"," banane","beurre","pomme de terre","cafe","pomme","jus","raisins","fromage","poire","poisson","viande","vin" ,"le poulet","l'orange","le citron"," la figue de barbarie","la fraise","les frites","la soupe","croissant","chocolat","toast","glace","menthe thé","spaghetti","hamburger","pizza","la nouille", "mandarine", "thon"," pudding"," risotto"," soupe de goulasch"]
+        var divhead2=document.getElementById("divhead2");
+        var container=document.querySelectorAll(".select-box");
+        var widthM =window.screen.width ;//* window.devicePixelRatio;
+        var heightM=window.screen.height ;//* window.devicePixelRatio;
+        var contdivwdth=widthM*0.8
+        document.body.innerHTML+=`<div class="row" ></div>`
+        var rows= document.querySelectorAll(".row");
+        for(var i=0;i<imgs.length;i++){//0 -- vrai vrai // flae
+          // if(i%3==0 && tf==true ){
+          //   tf=false
+          // }else{//
+          //   tf=true
+          // }
+            if(i%5==0){
+                rows[0].innerHTML+=`<div class="cr cr1" >
+                    <img src="${imgs[i]}" class="img" alt="eror404" ><img>
+                    <h2 style="text-align: center;" class="language" >${names[i]}</h2>
+                </div>`
+            }else{
+                rows[0].innerHTML+=`<div class="cr" >
+                    <img src="${imgs[i]}" class="img" alt="eror404" ><img>
+                    <h2 style="text-align: center;" class="language" >${names[i]}</h2>
+                </div>`
+            }
+        }
+    if ( /android|webOS|iPhone|iPad|iPod|blackberry|IEMobile|Opera Mini|Windows Phone/i.test(navigator.userAgent) ){//phone
+        document.getElementById("h2").style.fontSize="20px"
+        document.getElementById("divhead2").style.width=`${contdivwdth}px`
+        document.querySelectorAll(".select-box")[0].style.width=`${contdivwdth}px`
+        document.getElementById("btn").style.display="none"
+        if ( /android|webOS|iPhone|iPod|blackberry|IEMobile|Opera Mini|Windows Phone/i.test(navigator.userAgent) ){//phones without ipad
+          class Orientation{
+  constructor(){
+    addEventListener("load",()=>{
+      this.orientation();
+    });
+addEventListener("orientationchange",()=>{
+  this.orientation();
+});
+  }
+
+  orientation(){
+    if(screen.orientation.type =="portrait-primary" || screen.orientation.type =="portrait-secondary"  ){
+var widthM1 =window.screen.width*0.9
+var cr= document.querySelectorAll(".cr");
+for(var i=0;i<imgs.length;i++){
+  document.querySelectorAll(".cr")[i].style.width=`${widthM1}px`
+  document.querySelectorAll(".cr")[i].style.height="auto"
+  document.querySelectorAll(".cr")[i].style.marginRight="0px"
+  document.querySelectorAll(".cr")[i].style.marginBottom="20px"
+};
+}else if(screen.orientation.type =="landscape-primary" ||  screen.orientation.type =="landscape-landscape-secondary" ){
+
+  var cr= document.querySelectorAll(".cr");
+for(var i=0;i<imgs.length;i++){
+  cr[i].style.width="300px"
+  cr[i].style.height="300px"
+  document.querySelectorAll(".cr")[i].style.marginRight="26px"
+  document.querySelectorAll(".cr")[i].style.marginBottom="-20px"
+};
+}
+  }
+}
+onload = new Orientation();
+        }
+    }else{ //computer
+        document.getElementById("h2").style.fontSize="25px"
+        document.getElementById("divhead2").style.width="450px"
+        document.querySelectorAll(".select-box")[0].style.width="400px"
+    }
+
+
+
+    const selected = document.querySelector(".selected");
+const optionsContainer = document.querySelector(".options-container");
+
+const optionsList = document.querySelectorAll(".option");
+
+selected.addEventListener("click", () => {
+  optionsContainer.classList.toggle("active");
+});
+
+optionsList.forEach(o => {
+  o.addEventListener("click", () => {
+    selected.innerHTML = o.querySelector("label").innerHTML;
+    optionsContainer.classList.remove("active");
+  });
+});
+
+
+document.getElementById("english").addEventListener("click",function(){
+    for(var i=0;i<imgs.length;i++){
+        document.querySelectorAll(".language")[i].innerHTML=`${nenglish[i]}`
+    }
+    document.getElementById("h2").innerHTML="what do you like to eat ?"
+});
+document.getElementById("spain").addEventListener("click",function(){
+    for(var i=0;i<imgs.length;i++){
+        document.querySelectorAll(".language")[i].innerHTML=`${nspain[i]}`
+    }
+    document.getElementById("h2").innerHTML="qué te gusta comer ?"
+});
+
+document.getElementById("italian").addEventListener("click",function(){
+    for(var i=0;i<imgs.length;i++){
+        document.querySelectorAll(".language")[i].innerHTML=`${nitalian[i]}`
+    }
+    document.getElementById("h2").innerHTML="cosa ti piace mangiare ?"
+});
+document.getElementById("german").addEventListener("click",function(){
+    for(var i=0;i<imgs.length;i++){
+        document.querySelectorAll(".language")[i].innerHTML=`${names[i]}`
+    }
+    document.getElementById("h2").innerHTML="was essen Sie gern ?"
+});
+document.getElementById("french").addEventListener("click",function(){
+    for(var i=0;i<imgs.length;i++){
+        document.querySelectorAll(".language")[i].innerHTML=`${nfrench[i]}`
+    }
+    document.getElementById("h2").innerHTML="Qu'est-ce que tu aimes manger ?"
+});
+
+let german = document.getElementById("german");
+let english = document.getElementById("english");
+let spain = document.getElementById("spain");
+let italian = document.getElementById("italian");
+let french = document.getElementById("french");
+
+german.onclick = ()=>{
+    setLanugage("german");
+    localStorage.setItem("Lang","german");
+};
+
+english.onclick = ()=>{
+    setLanugage("english");
+    localStorage.setItem("Lang","english");
+};
+spain.onclick = ()=>{
+    setLanugage("spain");
+    localStorage.setItem("Lang","spain");
+};
+
+italian.onclick = ()=>{
+    setLanugage("italian");
+    localStorage.setItem("Lang","italian");
+};
+french.onclick = ()=>{
+    setLanugage("french");
+    localStorage.setItem("Lang","french");
+};
+
+
+onload = ()=>{
+    setLanugage(localStorage.getItem("Lang"));
+};
+function setLanugage(getLanuage){
+if(getLanuage === "english"){
+  for(var i=0;i<imgs.length;i++){
+        document.querySelectorAll(".language")[i].innerHTML=`${nenglish[i]}`
+    }
+    document.getElementById("h2").innerHTML="what do you like to eat ?"
+}else if(getLanuage ==="german"){
+  for(var i=0;i<imgs.length;i++){
+        document.querySelectorAll(".language")[i].innerHTML=`${names[i]}`
+    }
+    document.getElementById("h2").innerHTML="was essen Sie gern ?"
+}else if(getLanuage === "spain"){
+  for(var i=0;i<imgs.length;i++){
+        document.querySelectorAll(".language")[i].innerHTML=`${nspain[i]}`
+    }
+    document.getElementById("h2").innerHTML="qué te gusta comer ?"
+}else if(getLanuage ==="italian"){
+  for(var i=0;i<imgs.length;i++){
+        document.querySelectorAll(".language")[i].innerHTML=`${nitalian[i]}`
+    }
+    document.getElementById("h2").innerHTML="cosa ti piace mangiare ?"
+}else if(getLanuage==="french"){
+  for(var i=0;i<imgs.length;i++){
+        document.querySelectorAll(".language")[i].innerHTML=`${nfrench[i]}`
+    }
+    document.getElementById("h2").innerHTML="Qu'est-ce que tu aimes manger ?"
+}
+
+}
+
+document.getElementById("btn").addEventListener("click",function(){
+          // if(i%3==0 && tf==true ){
+          //   tf=false
+          // }else{//
+          //   tf=true
+          // }
+          var tf=false;
+    for(var i=0;i<imgs.length;i++){
+          if(i%3==0 && tf==true ){
+            tf=false
+          }else if(i%3==0 && tf==false){//
+            tf=true
+          }
+          if(tf==false){
+            document.querySelectorAll(".cr")[i].style.marginBottom="120px"
+          }
+    }
+    window.print();
+    for(var i=0;i<imgs.length;i++){
+      document.querySelectorAll(".cr")[i].style.marginBottom="0px"
+    }
+});
+/* k=565
+z<--0 
+y<--k
+repeter
+  z<--z+(y mod 10)**3
+  y<--y div 10    //56
+jusqa y=0 
+*/
+</script>
+   
+</body>
+</html>
